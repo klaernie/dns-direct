@@ -6,7 +6,11 @@
 #  Date: August 2013
 ##############################################################################
 
+# change to the directory that dns-direct is running in
 cd $(dirname $0)
+
+# source the config
+# TODO: support global config in /etc or searching it from different places
 source dns-direct.conf
 
 DEBUG=1
