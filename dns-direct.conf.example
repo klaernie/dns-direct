@@ -1,0 +1,65 @@
+# Please make sure to adopt each point to your usecase!
+
+# Base Folder (where you checked out the git-repo)
+# used to write logfiles and temp files to
+BASE=/root/dns-direct
+
+# Logfiles
+
+# $LOGFILE contains the general log of each IP transition and if the update
+# succeeded or failed
+LOGFILE="$BASE/dns-direct.log"
+
+# $LASTRUN contains the answer from the last nsupdate-run. Reading it can help
+# you to figure out what the problems with your config or your setup are
+LASTRUN="$BASE/dns-direct.lastrun"
+
+# URL to check for current IP
+# the example script used is as simple as "<?php echo $_SERVER['REMOTE_ADDR']; ?>"
+# and used by the server given in the example URL below.
+
+# I use HTTPS to avoid that someone tampers with the IP in transit (as they
+# could takeover my own services if they update the DNS-RRs to one of their
+# IPs). If you need help and a SSL-certificate checkout http://www.cacert.org
+# or simply ask me for help.
+
+# You can also use this URL, but remember: it might vanish or move any day
+# without any chance that I could inform you.
+CHECK_URL="https://port1.mia.ak-online.be/ip.php"
+
+# This is the main ressource record you want to be updated and checked.
+HOST=vpn.ak-online.be.
+
+# These DNS-RRs will be also updated together with $HOST, but will not be
+# checked if they have the same IP as $HOST before the update (so it might
+# override it as long as the $NS and $KEYFILE allow to update the zone to which
+# it belongs). Also they will be updated unconditionally if $HOST is updated.
+# Multiple RRs should be separated by a space
+AlsoUpdate="debs.ak-online.be. hive.ak-online.be. mainframe.ak-online.be. linksys.ak-online.be. mail.ak-online.be. stats.ak-online.be. wiki.ak-online.be. light.ak-online.be. fynn.ak-online.be. olli.ak-online.be. sapdeb2.ak-online.be."
+
+# This nameserver where the DNS-RRs should be updated and which should get
+# asked for the current IP to check against. It is quite crucial to use the
+# primary DNS server for this as the slave zones are not guaranteed to be
+# configured for being updated dynamically and forwarding the change to the
+# real primary. Also please use the IPv4 of the DNS server instead of the
+# hostname. It could work to use the hostname, but it depends on the fact that
+# the DNS server is resolvable (sometimes iffy if you have a split DNS setup
+# with a different zone internally or if the hostname resolved to an IPv6
+# address that might not work temporarily as the IPv6-tunnel has to be
+# restarted before the IPv6-internet is back available.)
+# I also keep the hostname in the comment to ease my memory so that I know
+# which server I configured.
+
+#NS=mia.ak-online.be.
+NS="83.169.34.170"
+
+# The Time-To-Live value that the updated DNS-RRs should have.
+# I recommend to set it to something quite low, eg. 60s, so that the old value
+# is always pushed out quite fast and not still around for a week if your IP
+# changes each day or might change within minutes at some time.
+TTL=60
+
+# The keyfile to use for authenticating the update message to the DNS server.
+# Check out dns-direct.bind-config for find out how to create it.
+KEYFILE=$BASE/Kdnsupdate.debs.ak-online.be.+157+05115.private
+

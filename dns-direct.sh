@@ -6,20 +6,8 @@
 #  Date: December 2010
 ##############################################################################
 
-# Base Folder
-BASE=/root/dns-direct
-# Logfile
-LOGFILE="$BASE/dnsactual.log"
-LASTRUN="$BASE/dnsactual.lastrun"
-# URL to check for current IP
-CHECK_URL="https://port1.mia.ak-online.be/ip.php"
-
-HOST=vpn.ak-online.be.
-AlsoUpdate="debs.ak-online.be. hive.ak-online.be. mainframe.ak-online.be. linksys.ak-online.be. mail.ak-online.be. stats.ak-online.be. wiki.ak-online.be. light.ak-online.be. fynn.ak-online.be. olli.ak-online.be. sapdeb2.ak-online.be."
-#NS=mia.ak-online.be.
-NS="83.169.34.170"
-TTL=60
-KEYFILE=$BASE/Kdnsupdate.debs.ak-online.be.+157+05115.private
+cd $(dirname $0)
+source dns-direct.conf
 
 DEBUG=1
 DEBUG=`test "$*" = "debug" ; echo $?`
