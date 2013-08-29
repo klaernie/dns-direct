@@ -21,7 +21,7 @@ DEBUG=`test "$*" = "debug" ; echo $?`
 
 # define a function to output debugging info
 function debug(){
-	if $DEBUG -eq 0
+	if [ $DEBUG -eq 0 ]
 	then
 		echo $@
 	fi
