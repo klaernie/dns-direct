@@ -31,7 +31,7 @@ OldIP=$(dig @$NS +short +tries=10 A $HOST 2>>tmpfile)
 debug "OldIP: $OldIP"
 
 [ $FORCE -eq 1 ] && OldIP="x.x.x."
-CurreIP=$(curl -sS -3 -4 --user-agent "curl/7.21.0 (i486-pc-linux-gnu) dnsactual" $CHECK_URL 2>>tmpfile)
+CurreIP=$(curl -sS -3 -4 --user-agent "curl/7.21.0 (i486-pc-linux-gnu) dns-direct" $CHECK_URL 2>>tmpfile)
 
 debug "NewIP: $CurreIP"
 
