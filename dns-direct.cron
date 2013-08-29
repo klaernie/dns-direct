@@ -4,4 +4,4 @@
 # maybe you need to adapt the timing, at least you need to update the path
 
 #m	h	dom	mon	dow	user command
-*/5	*	*	*	*	root /root/dns-direct/dnsactual.sh
+*/5	*	*	*	*	root /root/dns-direct/dns-direct.sh
