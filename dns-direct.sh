@@ -1,9 +1,9 @@
 #!/bin/bash
 ##############################################################################
 #
-#  application name: dnsactual3
+#  application name: dns-direct
 #  Author: Andre Klärner
-#  Date: December 2010
+#  Date: August 2013
 ##############################################################################
 
 cd $(dirname $0)
