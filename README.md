@@ -15,7 +15,7 @@ dependencies is enough.
   2. create a symmetric HMAC-MD5 key to use with bind by using dnssec-keygen
      and also copy the key to here
   3. configure your bind-server on the server-side to accept updates for the
-     zone containing your $HOST and $AdditionalHosts from the key you created.
+     zone containing your $HOST and $AlsoUpdate from the key you created.
      You can use dns-direct.bind-config as a hint
   4. test out by running dns-direct.sh from your shell (optionally with the
      parameter "debug")
