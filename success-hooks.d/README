@@ -1,0 +1,5 @@
+Each executable file will be executed by run-parts once an update was successful.
+
+The files are executed in C-sorting-order, please check the run-parts manpage for naming issues.
+
+So this is the right place to cleanup things that get broken if the IP changed.
