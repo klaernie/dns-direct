@@ -16,13 +16,25 @@ source dns-direct.conf
 DEBUG=1
 DEBUG=`test "$*" = "debug" ; echo $?`
 
+# define a function to output debugging info
+function debug(){
+	if $DEBUG -eq 0
+	then
+		echo $@
+	fi
+}
+
 FORCE=0
 
 OldIP=$(dig @$NS +short +tries=10 $HOST 2>>tmpfile)
-[ $DEBUG -eq 0 ] && echo OldIP: $OldIP
+
+debug "OldIP: $OldIP"
+
 [ $FORCE -eq 1 ] && OldIP="x.x.x."
 CurreIP=$(curl -sS -3 -4 --user-agent "curl/7.21.0 (i486-pc-linux-gnu) dnsactual" $CHECK_URL 2>>tmpfile)
-[ $DEBUG -eq 0 ] && echo NewIP: $CurreIP
+
+debug "NewIP: $CurreIP"
+
 if [ -z "$CurreIP" -o -z "$OldIP" ]
 then
 	echo "Retrieval of old or new IP failed:"
@@ -33,7 +45,7 @@ fi
 if [ "$CurreIP" = "$OldIP" ]
 then
 	# Both IPs are equal
-	[ $DEBUG -eq 0 ] && echo "Update not required..."
+	debug "Update not required..."
 	exit 0
 else
 	# The IP might have changed
