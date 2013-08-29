@@ -26,7 +26,7 @@ function debug(){
 
 FORCE=0
 
-OldIP=$(dig @$NS +short +tries=10 $HOST 2>>tmpfile)
+OldIP=$(dig @$NS +short +tries=10 A $HOST 2>>tmpfile)
 
 debug "OldIP: $OldIP"
 
