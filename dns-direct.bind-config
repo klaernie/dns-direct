@@ -1,0 +1,42 @@
+# vim : ft=named :
+
+# first of all create a key with dnssec-keygen:
+
+# $ dnssec-keygen -a HMAC-MD5 -b 512 -n HOST dnsupdate.host.name.here.tld
+# the used options are:
+#	-a : algorithm HMAC-MD5 (the only one supported for this use)
+#	-b : bits to use (512 is the only sane choice)
+#	-n : type of the key, HOST is the right choice here.
+#	last argument: the hostname/identifier. as you grow you might want to
+#		use this also a customer's machine with your server, and/or with your
+#		machine to manage the zones remotely, so it is always wise to use
+#		something that defines this as dnsupdate and the host which the script
+#		is running on (at least this is my convention)
+
+
+
+# second place somewhere in your named.conf (or named.conf.local on debian) a section like this one:
+
+# the name here is arbitrary, you only have to take the content of the "Key: ..." line your generated previously
+key dnsupdate.debs.ak-online.be {
+	algorithm HMAC-MD5;
+	secret "s0.....................................................................................==";
+};
+
+# then put this to use in your zone-definition:
+# make sure you use the same identifier you used in the key ... {}; definition.
+
+zone "ak-online.be" {
+        type master;
+        file "ak-online.be.zone";
+
+        allow-update {
+                key kandre.ak-online.be.;
+                key dnsupdate.eliza.ak-online.be.;
+        };
+};
+
+# You might notice: I also listed the example for my other key, used by my
+# machines at home to remotely and easily manage my zones.
+
+# after you completed this restart bind, and test it out.
