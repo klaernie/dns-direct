@@ -49,8 +49,8 @@ else
 	if [ "$OldIP" = ";; connection timed out; no servers could be reached" ]
 	then 
 		echo "Update not possible, no DNS server was reachable"
-		echo "trying to restart ppp"
-		/sbin/ifdown ppp0;/sbin/ifup ppp0
+		echo "running failure hooks:"
+		run-parts "$BASE/fail-hooks.d"
 		exit 2
 	fi
 
