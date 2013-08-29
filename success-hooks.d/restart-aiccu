@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# example script to restart aiccu
+
+echo "trying to restart aiccu"
+service aiccu restart
