@@ -3,4 +3,4 @@
 # example script to restart aiccu
 
 echo "trying to restart aiccu"
-service aiccu restart
+/usr/sbin/service aiccu restart
