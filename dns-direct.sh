@@ -43,7 +43,7 @@ debug "OldIP: $OldIP"
 [ $FORCE -eq 1 ] && OldIP="x.x.x."
 
 # Fetch the current external IP by asking our trusting $CHECK_URL
-CurreIP=$(curl -sS -3 -4 --user-agent "curl/7.21.0 (i486-pc-linux-gnu) dns-direct" $CHECK_URL 2>>tmpfile)
+CurreIP=$(curl -sS -4 --user-agent "curl/7.47.0 (i486-pc-linux-gnu) dns-direct" $CHECK_URL 2>>tmpfile)
 # options used for curl:
 #	-sS : no regular output, but bark on errors
 #	-3  : use SSLv3
