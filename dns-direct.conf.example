@@ -25,7 +25,7 @@ LASTRUN="$BASE/dns-direct.lastrun"
 
 # You can also use this URL, but remember: it might vanish or move any day
 # without any chance that I could inform you.
-CHECK_URL="https://port1.mia.ak-online.be/ip.php"
+CHECK_URL="https://ip.ak-online.be/ip.php"
 
 # This is the main ressource record you want to be updated and checked.
 HOST=vpn.ak-online.be.
